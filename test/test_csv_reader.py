@@ -48,18 +48,13 @@ def test_order_csvs(csv_processor, mocker):
     """Test _order_csvs to ensure correct sorting and filtering."""
     mock_listdir = mocker.patch(
         "os.listdir",
-        return_value=[
-            "batch3.csv",
-            "batch1.csv",
-            "other_file.csv",
-            "batch2.csv",
-        ],
+        return_value=["batch3.csv", "batch1.csv", "other_file.csv", "batch2.csv",],
     )
     # Set a predictable batch_data_dir in the mock object
     csv_processor.batch_data_dir = "/mock/batch/data"
 
     ordered_list = csv_processor._order_csvs()
-    assert ordered_list == ["batch1.csv", "batch2.csv", "batch3.csv","other_file.csv"]
+    assert ordered_list == ["batch1.csv", "batch2.csv", "batch3.csv", "other_file.csv"]
 
 
 def test_process_csvs_basic_flow(csv_processor, mocker):
